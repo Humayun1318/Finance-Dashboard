@@ -16,39 +16,45 @@ import { Link } from "react-router";
 import Logo from "@/assets/icons/Logo";
 import { getSidebarItems } from "@/utils/getSidebarItems";
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  // const { data: userData } = useUserInfoQuery(undefined);
+interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
+  role: "ADMIN" | "VIEWER";
+  loading: boolean;
+}
 
+export function AppSidebar({ role, loading, ...props }: AppSidebarProps) {
   const data = {
-    // navMain: getSidebarItems(userData?.data?.role),
-    navMain: getSidebarItems("ADMIN"),
+    navMain: loading ? [] : getSidebarItems(role),
   };
 
   return (
     <Sidebar {...props}>
-      <SidebarHeader className="">
+      <SidebarHeader className="flex flex-row gap-2 items-center">
         <Link to="/">
           <Logo />
         </Link>
+        <h5 className="font-heading font-semibold">Finance</h5>
       </SidebarHeader>
       <SidebarContent>
-        {/* We create a SidebarGroup for each parent. */}
-        {data.navMain.map((item) => (
-          <SidebarGroup key={item.title}>
-            <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu>
-                {item.items.map((item) => (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild>
-                      <Link to={item.url}>{item.title}</Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
-        ))}
+        {loading ? (
+          <div className="p-4">Loading menu...</div>
+        ) : (
+          data.navMain.map((item) => (
+            <SidebarGroup key={item.title}>
+              <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
+              <SidebarGroupContent>
+                <SidebarMenu>
+                  {item.items.map((item) => (
+                    <SidebarMenuItem key={item.title}>
+                      <SidebarMenuButton asChild>
+                        <Link to={item.url}>{item.title}</Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  ))}
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
+          ))
+        )}
       </SidebarContent>
       <SidebarRail />
     </Sidebar>

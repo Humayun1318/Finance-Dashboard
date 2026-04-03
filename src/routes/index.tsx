@@ -1,7 +1,8 @@
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import { generateRoutes } from "@/utils/generateRoutes";
 import { createBrowserRouter, Navigate } from "react-router";
-import { adminSidebarItems } from "./adminSidebarItems";
+import { adminSidebarItems, viewerSidebarItems } from "./adminSidebarItems";
+import NotFound from "@/pages/NotFound";
 
 export const routes = createBrowserRouter([
   {
@@ -15,5 +16,17 @@ export const routes = createBrowserRouter([
       { index: true, element: <Navigate to="/admin/overview" /> },
       ...generateRoutes(adminSidebarItems),
     ],
+  },
+  {
+    Component: DashboardLayout,
+    path: "/viewer",
+    children: [
+      { index: true, element: <Navigate to="/viewer/overview" /> },
+      ...generateRoutes(viewerSidebarItems),
+    ],
+  },
+  {
+    Component: NotFound,
+    path: "*",
   },
 ]);
