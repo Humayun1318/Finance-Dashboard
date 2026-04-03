@@ -11,3 +11,11 @@ export interface ISidebarItem {
     component: ComponentType;
   }[];
 }
+
+export interface ITransaction {
+  id: string;
+  date: string;
+  category: string;
+  type: "Income" | "Expense";
+  amount: number;
+};

@@ -12,7 +12,7 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import Logo from "@/assets/icons/Logo";
 import { getSidebarItems } from "@/utils/getSidebarItems";
 
@@ -22,9 +22,12 @@ interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
 }
 
 export function AppSidebar({ role, loading, ...props }: AppSidebarProps) {
+  const location = useLocation();
   const data = {
     navMain: loading ? [] : getSidebarItems(role),
   };
+
+  const isActive = (url: string) => location.pathname === url;
 
   return (
     <Sidebar {...props}>
@@ -45,7 +48,7 @@ export function AppSidebar({ role, loading, ...props }: AppSidebarProps) {
                 <SidebarMenu>
                   {item.items.map((item) => (
                     <SidebarMenuItem key={item.title}>
-                      <SidebarMenuButton asChild>
+                      <SidebarMenuButton asChild isActive={isActive(item.url)}>
                         <Link to={item.url}>{item.title}</Link>
                       </SidebarMenuButton>
                     </SidebarMenuItem>

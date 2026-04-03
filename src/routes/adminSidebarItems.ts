@@ -1,3 +1,4 @@
+import Insights from "@/pages/dashboard/Insights";
 import Overview from "@/pages/dashboard/Overview";
 import type { ISidebarItem } from "@/types";
 import { lazy } from "react";
@@ -20,9 +21,15 @@ export const adminSidebarItems: ISidebarItem[] = [
         url: "/admin/transactions",
         component: Transactions,
       },
+      {
+        title: "Insights",
+        url: "/admin/insights",
+        component: Insights,
+      },
     ],
   },
 ];
+
 export const viewerSidebarItems: ISidebarItem[] = [
   {
     title: "Dashboard",
@@ -36,6 +43,11 @@ export const viewerSidebarItems: ISidebarItem[] = [
         title: "Transactions",
         url: "/viewer/transactions",
         component: Transactions,
+      },
+      {
+        title: "Insights",
+        url: "/viewer/insights",
+        component: Insights,
       },
     ],
   },
