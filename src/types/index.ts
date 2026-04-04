@@ -19,3 +19,19 @@ export interface ITransaction {
   type: "Income" | "Expense";
   amount: number;
 };
+
+export interface ChartDataPoint {
+  month: string;
+  monthShort: string;
+  income: number;
+  expense: number;
+  balance: number;
+  year: number;
+}
+
+export interface SpendingDataPoint {
+  name: string;
+  value: number;
+  formattedValue: string;
+  percentage: number;
+}
