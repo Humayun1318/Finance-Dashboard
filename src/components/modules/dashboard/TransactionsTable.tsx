@@ -31,12 +31,12 @@ export default function TransactionsTable() {
       <div className="rounded-2xl border">
         <Table>
           <TableHeader>
-            <TableRow>
-              <TableHead>Date</TableHead>
+            <TableRow className="bg-muted rounded-2xl">
+              <TableHead className="rounded-tl-2xl">Date</TableHead>
               <TableHead>Category</TableHead>
               <TableHead>Type</TableHead>
-              <TableHead className="text-right">Amount</TableHead>
-              {isAdmin && <TableHead className="text-right">Action</TableHead>}
+              <TableHead className={`text-right ${isAdmin ? '' : 'rounded-tr-2xl'}`}>Amount</TableHead>
+              {isAdmin && <TableHead className="text-right rounded-tr-2xl">Action</TableHead>}
             </TableRow>
           </TableHeader>
 
@@ -46,19 +46,19 @@ export default function TransactionsTable() {
               [...Array(5)].map((_, i) => (
                 <TableRow key={i}>
                   <TableCell>
-                    <Skeleton className="h-4 w-[80px]" />
+                    <Skeleton className="h-4 w-20" />
                   </TableCell>
 
                   <TableCell>
-                    <Skeleton className="h-4 w-[100px]" />
+                    <Skeleton className="h-4 w-25" />
                   </TableCell>
 
                   <TableCell>
-                    <Skeleton className="h-4 w-[80px]" />
+                    <Skeleton className="h-4 w-20" />
                   </TableCell>
 
                   <TableCell className="text-right">
-                    <Skeleton className="h-4 w-[70px] ml-auto" />
+                    <Skeleton className="h-4 w-17.5 ml-auto" />
                   </TableCell>
 
                   {isAdmin && (
@@ -110,8 +110,8 @@ export default function TransactionsTable() {
                         t.amount > 0 ? "text-green-600" : "text-red-600"
                       }
                     >
-                      {t.amount > 0 ? "+" : ""}
-                      {t.amount}৳
+                      {t.amount > 0 ? "+" : "-"}
+                      {t.amount}₹
                     </span>
                   </TableCell>
 

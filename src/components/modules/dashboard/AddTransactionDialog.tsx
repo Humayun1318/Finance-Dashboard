@@ -49,7 +49,7 @@ export function AddTransactionDialog({ isAdmin }: { isAdmin: boolean }) {
       type: form.type as "Income" | "Expense",
       amount:
         form.type === "Expense"
-          ? -Math.abs(Number(form.amount))
+          ? Math.abs(Number(form.amount))
           : Math.abs(Number(form.amount)),
     };
 
