@@ -1,73 +1,138 @@
-# React + TypeScript + Vite
+# Finance Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive finance dashboard built with React, TypeScript, Vite, Tailwind CSS and Recharts.
 
-Currently, two official plugins are available:
+This project provides a role-sensitive dashboard experience with overview analytics, transaction management, and insights. It supports both admin and viewer modes and is designed for production deployment.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Key Features
 
-## React Compiler
+- Role-aware dashboard navigation for `admin` and `viewer`
+- Sidebar route structure with Overview, Transactions, and Insights
+- Overview page with:
+  - summary cards
+  - balance trend chart
+  - spending breakdown pie chart
+  - direct links to Transactions and Insights from Overview
+- Transactions management with add/edit/remove flow
+- Exportable transaction data as CSV and JSON from the Transactions page
+- Analytics insights and charts with tooltips
+- Theme toggle / dark mode support
+- Responsive layout optimized for desktop and mobile
+- Global cursor pointer and skeleton loading states for polished UX
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+- React 19
+- TypeScript
+- Vite
+- Tailwind CSS
+- Recharts
+- React Router v7
+- shadcn/ui + Radix UI components
+- lucide-react icons
+- ESLint
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Installation
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+This repo can be installed using `bun` as the package manager.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+bun install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+If you prefer npm, the same commands are available via `npm install`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Development
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Start the local development server:
+
+```bash
+bun run dev
 ```
+
+Then open the local Vite URL shown in the terminal.
+
+## Production Build
+
+Build the application for production:
+
+```bash
+bun run build
+```
+
+Preview the production build locally:
+
+```bash
+bun run preview
+```
+
+## Linting
+
+Run ESLint across the repository:
+
+```bash
+bun run lint
+```
+
+## Package Tools and Dependencies
+
+This project uses the tools defined in `package.json`:
+
+- `@tailwindcss/vite`
+- `class-variance-authority`
+- `clsx`
+- `date-fns`
+- `lucide-react`
+- `radix-ui`
+- `react`
+- `react-dom`
+- `react-router`
+- `recharts`
+- `shadcn`
+- `tailwind-merge`
+- `tailwindcss`
+- `tw-animate-css`
+
+Development tooling includes:
+
+- `@eslint/js`
+- `@types/node`
+- `@types/react`
+- `@types/react-dom`
+- `@vitejs/plugin-react`
+- `eslint`
+- `eslint-plugin-react-hooks`
+- `eslint-plugin-react-refresh`
+- `globals`
+- `typescript`
+- `typescript-eslint`
+- `vite`
+
+## Project Structure
+
+- `src/`
+  - `components/` — shared UI and dashboard components
+  - `pages/` — route pages for Overview, Transactions, Insights, and NotFound
+  - `routes/` — sidebar route definitions and role-based routing
+  - `context/` — theme and transaction state management
+  - `utils/` — helper functions and chart preparation utilities
+  - `providers/` — theme provider
+  - `assets/` — icons and static assets
+
+## Suggested Future Enhancement
+
+A natural next feature is an export option on the Transactions page or Overview page:
+
+- export transactions or summary data as `CSV`
+- export reports as `JSON`
+
+This would let users download ledger data directly from the dashboard and improve analytics workflows.
+
+## Notes
+
+- The current project is ready for production deployment after `bun run build`.
+- The Overview page now acts as a central hub and includes direct navigation to the other dashboard sections.
+
+---
+
+If you want, I can also add a dedicated `Export` button to the Transactions page and wire CSV/JSON generation into the existing table flow.

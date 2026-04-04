@@ -12,6 +12,7 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 
+import { Skeleton } from "@/components/ui/skeleton";
 import { Link, useLocation } from "react-router";
 import Logo from "@/assets/icons/Logo";
 import { getSidebarItems } from "@/utils/getSidebarItems";
@@ -39,7 +40,11 @@ export function AppSidebar({ role, loading, ...props }: AppSidebarProps) {
       </SidebarHeader>
       <SidebarContent>
         {loading ? (
-          <div className="p-4">Loading menu...</div>
+          <div className="space-y-3 p-4">
+            <Skeleton className="h-4 w-3/4" />
+            <Skeleton className="h-4 w-2/3" />
+            <Skeleton className="h-4 w-1/2" />
+          </div>
         ) : (
           data.navMain.map((item) => (
             <SidebarGroup key={item.title}>

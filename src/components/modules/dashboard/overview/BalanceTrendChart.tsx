@@ -12,8 +12,9 @@ import {
 import { TrendingUp, Calendar } from "lucide-react";
 import { useTransactions } from "@/context/TransactionsContext";
 import { prepareChartData } from "@/utils/prepareChartData";
+import { Button } from "@/components/ui/button";
 
-const BalanceTrendChart = () => {
+const BalanceTrendChart = ({ isAdmin }: { isAdmin: boolean }) => {
   const { data } = useTransactions();
   
   const { data: chartData, year } = prepareChartData(data);
@@ -63,10 +64,22 @@ const BalanceTrendChart = () => {
               <TrendingUp className="w-8 h-8 text-muted-foreground/40" />
             </div>
             <p className="text-sm text-muted-foreground">No transaction data available</p>
+            {isAdmin && (
+              <Button 
+                variant="outline"
+                size="sm"
+                className="mt-4"
+                onClick={() => (window.location.href = "/admin/transactions")}
+              >
+                <TrendingUp className="w-4 h-4" />
+                Add Your First Transaction
+              </Button>
+
+            )}
           </div>
         ) : (
           <>
-            <ResponsiveContainer width="100%" height={380}>
+            <ResponsiveContainer width="100%" height={300}>
               <ComposedChart data={chartData}>
                 <defs>
                   <linearGradient id="incomeGradient" x1="0" y1="0" x2="0" y2="1">
@@ -81,14 +94,13 @@ const BalanceTrendChart = () => {
                 
                 <CartesianGrid 
                   strokeDasharray="3 3" 
-                  stroke="hsl(var(--border))" 
+                  stroke="var(--border)" 
                   vertical={false}
                 />
                 
                 <XAxis 
                   dataKey="monthShort" 
-                  stroke="hsl(var(--muted-foreground))"
-                  fontSize={11}
+                  tick={{ fill: "var(--muted-foreground)", fontSize: 11 }}
                   tickLine={false}
                   axisLine={false}
                   interval={0}
@@ -96,14 +108,13 @@ const BalanceTrendChart = () => {
                 
                 <YAxis 
                   yAxisId="left"
+                  tick={{ fill: "var(--muted-foreground)", fontSize: 10 }}
                   label={{ 
                     value: 'Amount (₹)', 
                     position: 'insideLeft', 
                     angle: -90,
-                    style: { fontSize: '10px', fill: 'hsl(var(--muted-foreground))' }
+                    style: { fontSize: '10px', fill: 'var(--foreground)' }
                   }}
-                  stroke="hsl(var(--muted-foreground))"
-                  fontSize={10}
                   tickLine={false}
                   axisLine={false}
                   tickFormatter={(value) => {
@@ -117,14 +128,13 @@ const BalanceTrendChart = () => {
                 <YAxis 
                   yAxisId="right"
                   orientation="right"
+                  tick={{ fill: "var(--muted-foreground)", fontSize: 10 }}
                   label={{ 
                     value: 'Balance (₹)', 
                     position: 'insideRight', 
                     angle: 90,
-                    style: { fontSize: '10px', fill: 'hsl(var(--primary))' }
+                    style: { fontSize: '10px', fill: 'var(--foreground)' }
                   }}
-                  stroke="hsl(var(--primary))"
-                  fontSize={10}
                   tickLine={false}
                   axisLine={false}
                   tickFormatter={(value) => {
@@ -135,7 +145,11 @@ const BalanceTrendChart = () => {
                   width={50}
                 />
                 
-                <Tooltip content={<CustomTooltip />} cursor={{ fill: "hsl(var(--muted)/0.1)" }} />
+                <Tooltip 
+                  content={<CustomTooltip />} 
+                  cursor={{ fill: "var(--muted)", opacity: 0.08 }}
+                  wrapperStyle={{ outline: 'none' }}
+                />
                 
                 <Bar 
                   yAxisId="left"
@@ -160,10 +174,10 @@ const BalanceTrendChart = () => {
                   type="monotone"
                   dataKey="balance"
                   name="Balance"
-                  stroke="hsl(var(--primary))"
+                  stroke="var(--primary)"
                   strokeWidth={2.5}
                   dot={false}
-                  activeDot={{ r: 6, fill: "hsl(var(--primary))" }}
+                  activeDot={{ r: 6, fill: "var(--primary)" }}
                 />
               </ComposedChart>
             </ResponsiveContainer>
@@ -172,7 +186,7 @@ const BalanceTrendChart = () => {
             <p className="text-xs text-muted-foreground text-center pt-2 border-t border-border">
               📊 <span className="font-medium text-foreground">Green bars</span> = Monthly Income | 
               <span className="font-medium text-foreground ml-1"> Red bars</span> = Monthly Expense | 
-              <span className="font-medium text-primary ml-1"> Blue line</span> = Running Balance (Income - Expense over time)
+              <span className="font-medium text-primary ml-1"> Blue line (hover)</span> = Running Balance (Income - Expense over time)
             </p>
           </>
         )}

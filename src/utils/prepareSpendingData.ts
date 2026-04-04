@@ -1,6 +1,6 @@
 import type { ITransaction, SpendingDataPoint } from "@/types";
 
-export const prepareSpendingData = (data: ITransactionn[]): SpendingDataPoint[] => {
+export const prepareSpendingData = (data: ITransaction[]): SpendingDataPoint[] => {
     if (!data || !Array.isArray(data) || data.length === 0) {
       return [];
     }

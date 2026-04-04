@@ -1,0 +1,21 @@
+// Predefined categories
+export const CATEGORIES = [
+  "Food & Grocery",
+  "Bazar",
+  "Grocery",
+  "Salary",
+  "Freelance",
+  "Rent",
+  "Home",
+  "Car",
+  "Fuel",
+  "Transport",
+  "Shopping",
+  "Internet",
+  "Bills",
+  "Movie",
+  "Entertainment",
+  "Health",
+  "Medical",
+  "Other",
+];

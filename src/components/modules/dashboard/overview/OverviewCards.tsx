@@ -5,14 +5,8 @@ import { calculateTotals } from "@/utils/calculateTotals";
 import { Wallet, TrendingUp, TrendingDown } from "lucide-react";
 
 const OverviewCards = () => {
-  // Sample data - replace with your actual data
-//   const data = {
-//     netBalance: 0.00,
-//     totalIncome: 0.00,
-//     totalExpense: 0.00
-//   };
+
   const { data } = useTransactions();
-  console.log("OverviewCards data:", data);
 
   const { totalIncome, totalExpense, netBalance } = calculateTotals(data);
   const cards = [

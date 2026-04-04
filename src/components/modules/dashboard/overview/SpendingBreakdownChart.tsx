@@ -9,9 +9,10 @@ import {
 import { PieChart as PieChartIcon, TrendingDown, DollarSign } from "lucide-react";
 import { useTransactions } from "@/context/TransactionsContext";
 import { prepareSpendingData } from "@/utils/prepareSpendingData";
+import { Button } from "@/components/ui/button";
 
 
-const SpendingBreakdownChart = () => {
+const SpendingBreakdownChart = ({ isAdmin }: { isAdmin: boolean }) => {
   const { data } = useTransactions();
 
   const spendingData = prepareSpendingData(data);
@@ -19,7 +20,7 @@ const SpendingBreakdownChart = () => {
   const topCategory = spendingData[0];
 
   const COLORS = [
-    "hsl(var(--primary))",
+    "var(--primary)",
     "hsl(142, 76%, 36%)",
     "hsl(346, 77%, 49%)",
     "hsl(38, 92%, 50%)",
@@ -59,6 +60,19 @@ const SpendingBreakdownChart = () => {
             <p className="text-sm text-muted-foreground max-w-sm">
               Add expense transactions to see your spending breakdown by category
             </p>
+            {isAdmin && (
+
+              <Button
+                variant="outline"
+                size="sm"
+                className="mt-4"
+                onClick={() => (window.location.href = "/admin/transactions")}
+              >
+                <PieChartIcon className="w-4 h-4" />
+                Add Expense Transaction
+              </Button>
+
+            )}
           </div>
         ) : (
           <>
@@ -81,7 +95,7 @@ const SpendingBreakdownChart = () => {
             </div>
 
             {/* Chart */}
-            <ResponsiveContainer width="100%" height={280}>
+            <ResponsiveContainer width="100%" height={200}>
               <PieChart>
                 <Pie
                   data={spendingData}
@@ -98,7 +112,7 @@ const SpendingBreakdownChart = () => {
                     <Cell 
                       key={`cell-${index}`} 
                       fill={COLORS[index % COLORS.length]}
-                      stroke="hsl(var(--card))"
+                      stroke="var(--card)"
                       strokeWidth={2}
                     />
                   ))}
@@ -145,7 +159,7 @@ const CustomTooltip = ({ active, payload }: any) => {
     return null;
   };
 
-  const renderCustomLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, name }: any) => {
+  const renderCustomLabel = ({ cx, cy, midAngle, outerRadius, percent, name }: any) => {
     const RADIAN = Math.PI / 180;
     const radius = outerRadius * 1.1;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
@@ -157,7 +171,7 @@ const CustomTooltip = ({ active, payload }: any) => {
       <text 
         x={x} 
         y={y} 
-        fill="hsl(var(--foreground))"
+        fill="var(--foreground)"
         textAnchor={x > cx ? 'start' : 'end'}
         dominantBaseline="central"
         className="text-xs font-medium"
