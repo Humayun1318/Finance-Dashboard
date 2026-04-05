@@ -10,6 +10,11 @@ The Finance Dashboard is a sophisticated web application designed to manage and 
 
 ---
 
+### **Live Link** 🔗  
+[View the Dashboard](https://finance-dashboard-ruby-ten-70.vercel.app/admin/overview)
+
+---
+
 ## ✨ Key Features
 
 ### 1. **Role-Based Dashboard Navigation**
