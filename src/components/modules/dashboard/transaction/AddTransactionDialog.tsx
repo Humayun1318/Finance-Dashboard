@@ -190,8 +190,8 @@ export function AddTransactionDialog({ isAdmin , open, setOpen }: { isAdmin: boo
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="Income">💰 Income</SelectItem>
-                <SelectItem value="Expense">💸 Expense</SelectItem>
+                <SelectItem value="Income">Income</SelectItem>
+                <SelectItem value="Expense">Expense</SelectItem>
               </SelectContent>
             </Select>
           </div>
