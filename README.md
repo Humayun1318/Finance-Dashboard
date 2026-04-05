@@ -421,7 +421,3 @@ All transaction data is stored in the browser's `localStorage` under the key `tr
 
 - The current project is ready for production deployment after `bun run build`.
 - The Overview page now acts as a central hub and includes direct navigation to the other dashboard sections.
-
----
-
-If you want, I can also add a dedicated `Export` button to the Transactions page and wire CSV/JSON generation into the existing table flow.
