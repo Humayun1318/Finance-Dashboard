@@ -2,6 +2,7 @@ import type { ITransaction } from "@/types";
 import type { Dispatch, SetStateAction } from "react";
 import { createContext, useContext, useEffect, useState } from "react";
 import { transactionAPI } from "@/lib/transactionAPI";
+import { toast } from "sonner";
 
 type TransactionsContextValue = {
   data: ITransaction[];
@@ -41,6 +42,7 @@ export const TransactionsProvider = ({
     setLoading(true);
     const created = await transactionAPI.create(item);
     setData((prev) => [created, ...prev]);
+    toast.success("Transaction created successfully", {position: "top-center"});
     setLoading(false);
   };
 
@@ -48,6 +50,7 @@ export const TransactionsProvider = ({
     setLoading(true);
     const updated = await transactionAPI.update(item);
     setData((prev) => prev.map((t) => (t.id === updated.id ? updated : t)));
+    toast.success("Transaction updated successfully", {position: "top-center"});
     setLoading(false);
   };
 
@@ -55,6 +58,7 @@ export const TransactionsProvider = ({
     setLoading(true);
     await transactionAPI.remove(id);
     setData((prev) => prev.filter((t) => t.id !== id));
+    toast.warning("Transaction deleted successfully", {position: "top-center"});
     setLoading(false);
   };
 
